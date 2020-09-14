@@ -1,0 +1,39 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {  //어떤 원격 저장소에서 받을지를 정합니다
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+    //앞의 코드는 project plugin 의존성 관리를 위한 config
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management' //스프링부트의 의존성들을 관리해주는
+
+
+
+group 'com.wavestoked'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8  // added
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+//dependencies {
+//    testCompile group: 'junit', name: 'junit', version: '4.12'
+//}
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web') //ctr + option + space 자동완성
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+// we're not using spring initializer bc then we can't understand what build.gradle does
