@@ -11,7 +11,7 @@ buildscript {
     }
     //앞의 코드는 project plugin 의존성 관리를 위한 config
 }
-
+//cmd shift ctrl A
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
