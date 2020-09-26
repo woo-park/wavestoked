@@ -9,6 +9,8 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
+
+
     //앞의 코드는 project plugin 의존성 관리를 위한 config
 }
 //cmd shift ctrl A
@@ -31,9 +33,26 @@ repositories {
 //dependencies {
 //    testCompile group: 'junit', name: 'junit', version: '4.12'
 //}
+
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web') //ctr + option + space 자동완성
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')    // abstracted library
+    compile('com.h2database:h2') // inmemory relational db -> when rebooting, erases memory
     testCompile('org.springframework.boot:spring-boot-starter-test')
-}
+    compile('org.springframework.boot:spring-boot-starter-mustache')
 
+    // this fixes the gradle version problem
+    // https://github.com/jojoldu/freelec-springboot2-webservice/issues/78
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.projectlombok:lombok'
+
+}
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
 // we're not using spring initializer bc then we can't understand what build.gradle does
