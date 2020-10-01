@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-
 @Getter
-//@NoArgsConstructor
+@NoArgsConstructor
 @Entity
 public class User extends BaseTimeEntity {
     @Id
@@ -44,8 +43,7 @@ public class User extends BaseTimeEntity {
         return this;
     }
 
-    public String getRoleKey() {    // interesting
-        return this.role.getKey();  // getKey method is provided by lombok
+    public String getRoleKey() {
+        return this.role.getKey();
     }
-
 }

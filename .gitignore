@@ -3,3 +3,7 @@
 .gradle
 .idea
 application-oauth.properties
+# ----
+#    |      is not brought in from application.properties
+application-google.properties
+application-oauth.yml

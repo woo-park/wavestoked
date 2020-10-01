@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -37,4 +39,11 @@ public class PostsService {
         return new PostsResponseDto(entity);        // adding a layer of abstraction to the found entity(Posts)
     }
     // spring 에서 bean을 주고 받는방법은 @Autowired, setter, constructor
+
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)  // hm not found in the book
+    public List<PostsResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc()
+                .map(PostsResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
