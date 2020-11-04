@@ -3,6 +3,7 @@ package com.wavestoked.service.posts;
 
 import com.wavestoked.domain.posts.Posts;
 import com.wavestoked.domain.posts.PostsRepository;
+import com.wavestoked.web.dto.PostsListResponseDto;
 import com.wavestoked.web.dto.PostsResponseDto;
 import com.wavestoked.web.dto.PostsSaveRequestDto;
 import com.wavestoked.web.dto.PostsUpdateRequestDto;
@@ -33,6 +34,14 @@ public class PostsService {
         return id;  // after updating, we return the updated column's id
     }
 
+    @Transactional
+    public void delete (Long id) {
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
+
+        postsRepository.delete(posts);
+    }
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)  // hm not found in the book
     public PostsResponseDto findById(Long id) {         // returns Dto from repository Db
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
@@ -41,9 +50,9 @@ public class PostsService {
     // spring 에서 bean을 주고 받는방법은 @Autowired, setter, constructor
 
     @org.springframework.transaction.annotation.Transactional(readOnly = true)  // hm not found in the book
-    public List<PostsResponseDto> findAllDesc() {
+    public List<PostsListResponseDto> findAllDesc() {
         return postsRepository.findAllDesc()
-                .map(PostsResponseDto::new)
+                .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
     }
 }

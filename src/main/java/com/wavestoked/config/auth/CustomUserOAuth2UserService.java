@@ -30,6 +30,7 @@ public class CustomUserOAuth2UserService implements OAuth2UserService<OAuth2User
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService delagate = new DefaultOAuth2UserService();
+
         OAuth2User oAuth2User = delagate.loadUser(userRequest);         // userRequest from argument
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();    // to figure out/ differentiate from naver, or google login
