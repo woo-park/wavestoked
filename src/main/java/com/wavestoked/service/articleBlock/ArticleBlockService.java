@@ -20,8 +20,7 @@ public class ArticleBlockService {
         ArticleBlock articleBlock = articleBlockRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
 
-        articleBlock.update(requestDto.getAuthor(), requestDto.getArticleString());
-
+        articleBlock.update(requestDto.getAuthor(), requestDto.getArticleString()); // void function so it doesn't return anything
         return id;
     }
 

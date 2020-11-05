@@ -6,6 +6,7 @@ import com.wavestoked.domain.posts.Posts;
 import com.wavestoked.web.dto.ArticleBlockResponseDto;
 import com.wavestoked.web.dto.ArticleBlockSaveRequestDto;
 
+import com.wavestoked.web.dto.ArticleBlockUpdateRequestDto;
 import com.wavestoked.web.dto.PostsUpdateRequestDto;
 import org.junit.After;
 import org.junit.Test;
@@ -21,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;        // added man
 import java.util.HashMap;
 import java.util.List;      //for list                              // added manually
 import java.util.Map;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;           // added manually
 
@@ -57,14 +59,14 @@ public class ArticleBlockControllerTest {
         String expectedArticleString = "<div>post update block</div>";
         String expectedAuthor = "gyan";
 
-//        ArticleBlockUpdateRequestDto requestDto = ArticleBlockUpdateRequestDto.builder()
-//                .articleString(expectedArticleString)
-//                .author(expectedAuthor)
-//                .build();
-    /*
-        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;  // dont forget last slash
+        ArticleBlockUpdateRequestDto requestDto = ArticleBlockUpdateRequestDto.builder()
+                .articleString(expectedArticleString)
+                .author(expectedAuthor)
+                .build();
 
-        HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+        String url = "http://localhost:" + port + "/api/articleBlock/update/" + updateId;  // dont forget last slash
+
+        HttpEntity<ArticleBlockUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, Long.class);
@@ -73,11 +75,53 @@ public class ArticleBlockControllerTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
-        List<Posts> all = postsRepository.findAll();
-        assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
-        assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
-    */
+
+//        Optional<ArticleBlock> updatedBlock = articleBlockRepository.findById(updateId);
+        ArticleBlock updateBlock = articleBlockRepository.findById(updateId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + updateId));
+
+        System.out.println("updateBlock");
+        System.out.println(updateBlock.getAuthor());
+        assertThat(updateBlock.getAuthor()).isEqualTo(expectedAuthor);
+        assertThat(updateBlock.getArticleString()).isEqualTo(expectedArticleString);
+
+//        List<Posts> all = postsRepository.findAll();
+//        assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
+//        assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
+//    */
     }
+
+    @Test
+    public void Skin_getter() throws Exception {
+        String author_1 = "woo";
+        String articleString_1 = "<div>article1 html</div>";
+        int skinId_1 = 3;
+        ArticleBlockSaveRequestDto requestDto = ArticleBlockSaveRequestDto.builder().articleString(articleString_1).author(author_1).skinId(skinId_1).build();
+
+        String author_2 = "gyan";
+        String articleString_2 = "<div>article2 html</div>";
+        int skinId_2 = 3;
+        ArticleBlockSaveRequestDto requestDto_2 = ArticleBlockSaveRequestDto.builder().articleString(articleString_2).author(author_2).skinId(skinId_2).build();
+
+        String url = "http://localhost:" + port + "/api/articleBlock/save";
+        HttpEntity<ArticleBlockSaveRequestDto> requestEntity = new HttpEntity<>(requestDto);
+        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+
+        String url_2 = "http://localhost:" + port + "/api/articleBlock/save";
+        HttpEntity<ArticleBlockSaveRequestDto> requestEntity_2 = new HttpEntity<>(requestDto);
+        ResponseEntity<Long> responseEntity_2 = restTemplate.postForEntity(url_2, requestDto_2, Long.class);
+        assertThat(responseEntity_2.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity_2.getBody()).isGreaterThan(0L);
+
+        // saving done
+
+
+
+        String getSkin_url = "http://localhost:" + port + "/api/skin/{skinId}";
+    }
+
 
     @Test
     public void ArticleBlockDto_getter() throws Exception {

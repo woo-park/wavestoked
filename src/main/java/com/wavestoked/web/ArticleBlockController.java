@@ -20,7 +20,7 @@ public class ArticleBlockController {
     private final ArticleBlockService articleBlockService;
 
     @PostMapping("/api/articleBlock/update/{id}")
-    public ArticleBlockResponseDto update(@RequestBody ArticleBlockUpdateRequestDto requestDto, @PathVariable Long id) {
+    public Long update(@RequestBody ArticleBlockUpdateRequestDto requestDto, @PathVariable Long id) {
         return articleBlockService.update(requestDto, id);
     }
 

@@ -2,16 +2,16 @@ package com.wavestoked.domain.articleblock;
 
 
 import com.wavestoked.domain.BaseTimeEntity;
+import com.wavestoked.domain.skin.Skin;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Setter
 @Getter
 @NoArgsConstructor
 @Entity
@@ -22,12 +22,12 @@ public class ArticleBlock extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // auto generated
     private Long id;
 
-//    @Column(nullable = false)
-
     private String articleString;
     private int skinId;
     private String author;
 
+//    @Column(nullable = true)
+//    private Skin skin;  //추가하면 application에러나네
 
     @Builder
     public ArticleBlock(String articleString, int skinId, String author) {
@@ -36,6 +36,10 @@ public class ArticleBlock extends BaseTimeEntity {
         this.author = author;
     }
 
+    public void update(String author, String articleString) {
+        this.author = author;
+        this.articleString = articleString;
+    }
 
 
 
