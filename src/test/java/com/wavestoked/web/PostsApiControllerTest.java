@@ -5,7 +5,7 @@ import com.wavestoked.web.dto.PostsSaveRequestDto;
 import com.wavestoked.domain.posts.Posts;
 
 import com.wavestoked.web.dto.PostsUpdateRequestDto;
-import jdk.vm.ci.meta.Local;
+
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
