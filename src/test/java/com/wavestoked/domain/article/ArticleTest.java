@@ -1,3 +1,5 @@
+package com.wavestoked.domain.article;
+
 import com.wavestoked.domain.article.Article;
 import com.wavestoked.domain.article.ArticleRepository;
 import com.wavestoked.domain.skin.Skin;
@@ -20,10 +22,10 @@ import static org.assertj.core.api.Assertions.assertThat;           // added man
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ArticleTest {
     @Autowired
-    SkinRepository skinRepository;
+    private SkinRepository skinRepository;
 
     @Autowired
-    ArticleRepository articleRepository;
+    private ArticleRepository articleRepository;
 
     @Before
     public void setUp() throws Exception {
@@ -39,10 +41,15 @@ public class ArticleTest {
                 .build();
 
         articleRepository.save(article);
+
+//        Article article1 = articleRepository.findAll().get(0);
+//        System.out.println(articleRepository);
     }
 
     @Test
     public void testSaving() throws Exception {
+
+
         Article article = articleRepository.findAll().get(0);
         String author = article.getAuthor();
         assertThat(author).isEqualTo("author1");
