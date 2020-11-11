@@ -33,6 +33,8 @@ public class ArticleBlockController {
         // return new ArticleBlockResponseDto(id, skinId);  // this is for saving
     }
 
+
+
     @GetMapping("/api/articleBlockDto/{id}")
     public ArticleBlockResponseDto dtoFindById(@PathVariable Long id) { // or @RequestParam("name") String name
         return articleBlockService.dtoFindById(id);    // which fires query to DB -> get the entity -> returns dto

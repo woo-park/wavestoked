@@ -30,5 +30,6 @@ public interface ArticleBlockRepository extends JpaRepository<ArticleBlock, Long
     *
     *
     * */
+//    Optional<User> findByEmail(String email);
     Optional<ArticleBlock> findById(Long id);
 }

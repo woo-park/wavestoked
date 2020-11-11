@@ -22,7 +22,7 @@ public class Article extends BaseTimeEntity {
     @Column(nullable = true)
     private String author;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="SKIN_ID")         // creates a SKIN FK here
     private Skin skin;
 
