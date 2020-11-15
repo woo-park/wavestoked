@@ -13,6 +13,7 @@ public class ArticleSaveRequestDto {
     private String articleString;
     private Skin skin;
     private String author;
+    private int skinId;
     //    private LocalDateTime modifiedDate;
 
     @Builder
@@ -20,6 +21,20 @@ public class ArticleSaveRequestDto {
         this.articleString = articleString;
         this.author = author;
         this.skin = skin;
+    }
+
+    @Builder
+    public ArticleSaveRequestDto(String articleString, String author, int skinId) {
+        this.articleString = articleString;
+        this.author = author;
+        this.skinId = skinId;
+//        this.skin =
+
+//                String articleString = "<div>hi</div>";
+//        String author = "wooooo";
+//        Skin skinA = Skin.builder()
+//                .name("SkinA")
+//                .build();
     }
 
     public Article toEntity() {

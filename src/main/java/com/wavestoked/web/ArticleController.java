@@ -37,6 +37,11 @@ public class ArticleController {
 //        return articleBlockService.dtoFindById(id);    // which fires query to DB -> get the entity -> returns dto
 //        // return new ArticleBlockResponseDto(id, skinId);  // this is for saving
 //    }
+//    @PostMapping("/api/article/testsave")
+//    public @ResponseBody Long save(@RequestBody ArticleTestSaveRequestDto requestDto) {
+//
+//        return articleService.testsave(requestDto)
+//    }
 
     @PostMapping("/api/article/save")
     public @ResponseBody Long save(@RequestBody ArticleSaveRequestDto requestDto) {
