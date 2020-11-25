@@ -8,13 +8,22 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+        testORM_양방향_리팩토링();
     }
 
 
-//    public void testORM_양방향_리팩토링() {
-//
-//
-//    }
+    public static void testORM_양방향_리팩토링() {
+        System.out.println("hiii");
+
+
+
+
+
+    }
+
+
+
+
 }
 
 

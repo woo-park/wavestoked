@@ -17,7 +17,7 @@ import java.util.List;
 public class Item {
     @Id
     @GeneratedValue
-    @Column(name = "ITEM_ID")
+//    @Column(name = "ITEM_ID")
     private Long id;
 
     private String name;
