@@ -9,6 +9,12 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+
+
+//    public void testORM_양방향_리팩토링() {
+//
+//
+//    }
 }
 
 

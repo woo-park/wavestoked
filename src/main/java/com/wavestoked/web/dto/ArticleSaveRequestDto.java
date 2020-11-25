@@ -5,10 +5,12 @@ import com.wavestoked.domain.articleblock.ArticleBlock;
 import com.wavestoked.domain.skin.Skin;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ArticleSaveRequestDto {
     private String articleString;
     private Skin skin;
