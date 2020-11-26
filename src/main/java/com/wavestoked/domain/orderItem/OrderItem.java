@@ -16,15 +16,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 public class OrderItem {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORDER_ITEM_ID")
-    private Long id;
+    private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne //(fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID", nullable = false)
     private Item item;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne //(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORD_ID", nullable = false)
     private Ord ord;
 

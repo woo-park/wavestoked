@@ -21,16 +21,17 @@ import java.util.List;
 @Entity
 public class Ord {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORD_ID")
     @NotNull
-    private Long id;
+    private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+//    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Member.class)
     @JoinColumn(name="MEMBER_ID")
     private Member member;
 
-    @OneToMany(mappedBy = "ord", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "ord")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -39,19 +40,19 @@ public class Ord {
 //    @Enumerated(EnumType.STRING)
 //    private OrdStatus status;
 
-    public void setMember(Member member) {
-        if(this.member != null) {
-            this.member.getOrders().remove(this);
-            this.member = member;
-            member.getOrders().add(this);
-        }
-    }
-
-    public void addOrderItem(OrderItem orderItem) {
-        orderItems.add(orderItem);
-        orderItem.setOrd(this);
-
-    }
+//    public void setMember(Member member) {
+//        if(this.member != null) {
+//            this.member.getOrders().remove(this);
+//            this.member = member;
+//            member.getOrders().add(this);
+//        }
+//    }
+//
+//    public void addOrderItem(OrderItem orderItem) {
+//        orderItems.add(orderItem);
+//        orderItem.setOrd(this);
+//
+//    }
 
 
     public enum OrdStatus {

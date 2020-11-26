@@ -16,9 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 public class Item {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ITEM_ID")
-    private Long id;
+    private long id;
 
     private String name;
     private int price;

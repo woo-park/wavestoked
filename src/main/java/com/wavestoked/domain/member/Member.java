@@ -4,10 +4,7 @@ package com.wavestoked.domain.member;
 import com.wavestoked.domain.ord.Ord;
 //import com.wavestoked.domain.ord.Order;
 //import com.wavestoked.domain.team.Team;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,12 +17,14 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Member {
-    @Id @GeneratedValue
+    @Id
     @Column(name = "MEMBER_ID")
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_ID_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    private Long id;
+    private long id;
 
     private String name;
 
@@ -33,8 +32,8 @@ public class Member {
     private String street;
     private String zipcode;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Ord> orders = new ArrayList<Ord>();
+//    @OneToMany(targetEntity = Ord.class, mappedBy = "member")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Ord> orders = new ArrayList<Ord>();
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JoinColumn(name="TEAM_ID")
