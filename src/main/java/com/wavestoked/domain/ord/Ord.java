@@ -3,10 +3,8 @@ package com.wavestoked.domain.ord;
 
 import com.wavestoked.domain.member.Member;
 import com.wavestoked.domain.orderItem.OrderItem;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,7 +16,9 @@ import java.util.List;
 @Setter
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Builder
 public class Ord {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,11 +31,16 @@ public class Ord {
     @JoinColumn(name="MEMBER_ID")
     private Member member;
 
-    @OneToMany(mappedBy = "ord")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name="ORD_NAME")
+    private String ordName;
+
+    @OneToMany(mappedBy = "ord", targetEntity = OrderItem.class)//, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
+    @Column(name="ORD_DATE")   // H2인지 뭔지가 이름을 UPPER _ CASE밖에 읽질 못하네
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;
+    private Date ordDate;
 
 //    @Enumerated(EnumType.STRING)
 //    private OrdStatus status;

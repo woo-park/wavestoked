@@ -17,6 +17,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @EnableJpaAuditing  // JPA Auditing 활성화
@@ -46,18 +48,23 @@ public class Application {
         System.out.println("hiii");
         Member member = Member.builder().city("ny").name("w").street("onelamp").zipcode("10019").build();
 //        member.setCity("ny");
-        Ord ord = new Ord();
+//        Ord ord = new Ord();
+        Ord ord = Ord.builder().ordName("testing").build() ;
+        ord.setOrdName("test order");
+//        LocalDateTime dateTime = LocalDateTime.now();
+        Date d = new Date();
 
-
-        Skin skin = Skin.builder()
-                .name("test em skin")
-                .build();
-
-
-        Article article = Article.builder()
-                .author("test em author")
-                .skin(skin)
-                .build();
+        ord.setOrdDate(d);
+//
+//        Skin skin = Skin.builder()
+//                .name("test em skin")
+//                .build();
+//
+//
+//        Article article = Article.builder()
+//                .author("test em author")
+//                .skin(skin)
+//                .build();
 
         System.out.println("emmmm");
         System.out.println(em);
@@ -73,7 +80,7 @@ public class Application {
         System.out.println(ord);
 
         em.persist(member);
-//        em.persist(ord);
+        em.persist(ord);
 
         tx1.commit();
 
