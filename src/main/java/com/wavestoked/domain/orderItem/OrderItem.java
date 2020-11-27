@@ -20,11 +20,14 @@ public class OrderItem {
     @Column(name = "ORDER_ITEM_ID")
     private long id;
 
-    @ManyToOne //(fetch = FetchType.LAZY)
+
+//   Thorben Janssen -> So, better make sure that all of your to-one associations set the FetchType to LAZY.
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID", nullable = false)
     private Item item;
 
-    @ManyToOne //(fetch = FetchType.LAZY)
+//   Thorben Janssen -> So, better make sure that all of your to-one associations set the FetchType to LAZY.
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "ORD_ID", nullable = false)
     private Ord ord;
 

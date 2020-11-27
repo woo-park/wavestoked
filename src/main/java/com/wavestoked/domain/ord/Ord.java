@@ -26,8 +26,13 @@ public class Ord {
     @NotNull
     private long id;
 
+
+//  Thorben Janssen -> So, better make sure that all of your to-one associations set the FetchType to LAZY.
+
+
 //    @ManyToOne(fetch = FetchType.LAZY)
-    @ManyToOne(targetEntity = Member.class)
+    @ToString.Exclude                       // try <- this to avoid toString recursion loop
+    @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
     @JoinColumn(name="MEMBER_ID")
     private Member member;
 
@@ -42,22 +47,22 @@ public class Ord {
     @Temporal(TemporalType.TIMESTAMP)
     private Date ordDate;
 
-//    @Enumerated(EnumType.STRING)
-//    private OrdStatus status;
+    @Enumerated(EnumType.STRING)
+    private OrdStatus status;
 
-//    public void setMember(Member member) {
-//        if(this.member != null) {
-//            this.member.getOrders().remove(this);
-//            this.member = member;
-//            member.getOrders().add(this);
-//        }
-//    }
-//
-//    public void addOrderItem(OrderItem orderItem) {
-//        orderItems.add(orderItem);
-//        orderItem.setOrd(this);
-//
-//    }
+    public void setMember(Member member) {
+        if(this.member != null) {
+            this.member.getOrders().remove(this);
+            this.member = member;
+            member.getOrders().add(this);
+        }
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrd(this);
+
+    }
 
 
     public enum OrdStatus {

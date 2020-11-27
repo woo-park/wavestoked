@@ -10,10 +10,15 @@ import com.wavestoked.web.dto.ArticleSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 
 @RequiredArgsConstructor
 @RestController
 public class ArticleController {
+
+
     private final ArticleService articleService;
 
 //    @PostMapping("/api/article/update/{id}")

@@ -2,6 +2,9 @@ package com.wavestoked.web;
 
 import org.springframework.stereotype.Controller;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 @Controller
 public class TestController {
 //    private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -16,4 +19,13 @@ public class TestController {
 //        logger.error("ERROR Level 테스트");
 //        return mav;
 //    }
+//    @PersistenceContext
+//    EntityManager em;
+//    public void create()
+
+
+//    @PersistenceContext(unitName = "wavestoked")
+//    private EntityManager em;
+
+
 }
