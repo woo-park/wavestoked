@@ -3,6 +3,7 @@
 .gradle
 .idea
 build
+/build/
 application-oauth.properties
 # ----
 #    |      is not brought in from application.properties
