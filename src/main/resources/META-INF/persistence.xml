@@ -5,6 +5,10 @@
         <class>com.wavestoked.domain.member.Member</class>
         <class>com.wavestoked.domain.orderItem.OrderItem</class>
         <class>com.wavestoked.domain.item.Item</class>
+        <class>com.wavestoked.domain.post.Post</class>
+        <class>com.wavestoked.domain.announcement.Announcement</class>
+        <class>com.wavestoked.domain.topic.Topic</class>
+        <class>com.wavestoked.domain.board.Board</class>
 
 <!--        <class>com.wavestoked.domain.skin.Skin</class>-->
 <!--&lt;!&ndash;        disable scanning for mapped classes&ndash;&gt;-->
