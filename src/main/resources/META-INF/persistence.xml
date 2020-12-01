@@ -9,6 +9,7 @@
         <class>com.wavestoked.domain.announcement.Announcement</class>
         <class>com.wavestoked.domain.topic.Topic</class>
         <class>com.wavestoked.domain.board.Board</class>
+        <class>com.wavestoked.domain.book.Book</class>
 
 <!--        <class>com.wavestoked.domain.skin.Skin</class>-->
 <!--&lt;!&ndash;        disable scanning for mapped classes&ndash;&gt;-->

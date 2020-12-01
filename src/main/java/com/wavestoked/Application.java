@@ -2,6 +2,7 @@ package com.wavestoked;
 
 import com.wavestoked.domain.announcement.Announcement;
 import com.wavestoked.domain.article.Article;
+import com.wavestoked.domain.book.Book;
 import com.wavestoked.domain.member.Member;
 import com.wavestoked.domain.ord.Ord;
 //import com.wavestoked.domain.ord.Order;
@@ -38,7 +39,37 @@ public class Application {
 
         SpringApplication.run(Application.class, args);
 //        testORM_양방향_리팩토링();
-        testingDiscrim();
+//        testingDiscrim();
+//        test();
+    }
+    public static void test() {
+
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx1 = em.getTransaction();
+        tx1.begin();
+        em.persist(
+                new Book()
+                        .setIsbn("978-9730228236")
+                        .addProperty("title", "High-Performance Java Persistence")
+                        .addProperty("author", "Vlad Mihalcea")
+                        .addProperty("publisher", "Amazon")
+                        .addProperty("price", "$44.95")
+        );
+
+
+
+
+        tx1.commit();
+
+//
+//        List<Ord> resultList =
+//                em.createNamedQuery("Ord.findByStatus", Ord.class)
+//                        .setParameter("status", "CANCEL")
+//                        .getResultList();
+//
+//
+
+        em.close();
     }
 
     public static void testingDiscrim() {
