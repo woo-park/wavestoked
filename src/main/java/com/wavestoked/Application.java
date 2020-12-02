@@ -40,23 +40,30 @@ public class Application {
         SpringApplication.run(Application.class, args);
 //        testORM_양방향_리팩토링();
 //        testingDiscrim();
-//        test();
+//        test_json_type_db();  not working due to h2 not being able to map json type column
     }
-    public static void test() {
+    public static void test_json_type_db() {
 
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx1 = em.getTransaction();
         tx1.begin();
-        em.persist(
-                new Book()
-                        .setIsbn("978-9730228236")
-                        .addProperty("title", "High-Performance Java Persistence")
-                        .addProperty("author", "Vlad Mihalcea")
-                        .addProperty("publisher", "Amazon")
-                        .addProperty("price", "$44.95")
-        );
+//        em.persist(
+//                new Book()
+//                        .setIsbn("978-9730228236")
+//                        .addProperty("title", "High-Performance Java Persistence")
+//                        .addProperty("author", "Vlad Mihalcea")
+//                        .addProperty("publisher", "Amazon")
+//                        .addProperty("price", "$44.95")
+//        );
+        Book book1 = new Book();
 
+//        book1.setIsbn("978-9730228236")
+//                        .addProperty("title", "High-Performance Java Persistence")
+//                        .addProperty("author", "Vlad Mihalcea")
+//                        .addProperty("publisher", "Amazon")
+//                        .addProperty("price", "$44.95");
 
+        em.persist(book1);
 
 
         tx1.commit();

@@ -59,17 +59,16 @@ dependencies {
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-mustache')
+//    compile('com.h2database:h2:1.4.200')
     compile('com.h2database:h2')
-
 
     compile('org.springframework.boot:spring-boot-starter-oauth2-client')
     compile('org.springframework.session:spring-session-jdbc')      // to sync multiple tomcats' => session
 
     compile("org.mariadb.jdbc:mariadb-java-client")
 
-    compile group: 'com.vladmihalcea', name: 'hibernate-types-52', version: '1.0.0'
-//    compile group: 'com.vladmihalcea', name: 'hibernate-types-52', version: '2.10.0'
-
+//    compile group: 'com.vladmihalcea', name: 'hibernate-types-52', version: '1.0.0'
+    compile group: 'com.vladmihalcea', name: 'hibernate-types-52', version: '2.10.0'
 
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
