@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>SELEC7 agency</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="https://static2.selec7.com/img/favicon.png">
+
+    <!-- vendor css -->
+    <link href="https://static2.selec7.com/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="https://static2.selec7.com/lib/Ionicons/css/ionicons.css" rel="stylesheet">
+    <link href="https://static2.selec7.com/lib/rickshaw/css/rickshaw.min.css" rel="stylesheet">
+    <link href="https://static2.selec7.com/lib/select2/css/select2.min.css" rel="stylesheet">
+    <link href="https://static2.selec7.com/lib/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet">
+    <link href="https://static2.selec7.com/lib/jt.timepicker/css/jquery.timepicker.css" rel="stylesheet">
+
+    <!-- Nestable -->
+    <link rel="stylesheet" href="https://static2.selec7.com/vendors/nestable/nestable.css" type="text/css">
+
+    <!-- Slim CSS -->
+    <link rel="stylesheet" href="https://static2.selec7.com/css/slim.css">
+    <link rel="stylesheet" href="https://static2.selec7.com/css/custom.css">
+
+</head>
+<body class="dashboard-5">
+
+<input type="hidden" class="currentPage" id="currentPage" data-seq="{{ currentCodblockPage }}" >
+<input type="hidden" class="currentSubPage" id="currentSubPage" data-seq="{{ currentCodblockSubPage }}" >
+<input type="hidden" name="editerMode" id="editerMode" value="0" />
+
+
+<form id="csvForm" style="display:none;" enctype="multipart/form-data">
+    <input type="file" id="sendCsv" name="file"   />
+</form>
+
+<!--codblock header start-->
+{{>codblock/layout/header}}
+<!--codblock header end-->
+
+<div class="slim-body">
+
+    <!--codblock navigation start-->
+    {{>codblock/layout/navigation}}
+    <!--codblock navigation end-->
+
+
+    <div class="slim-mainpanel">
+        <div class="container">
+
+            <div class="ajax-container" style="background-color: transparent;">
+
+                <div class="container info-container">
+                    <div class="slim-pageheader">
+                        <ol class="breadcrumb slim-breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">판매관리</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{currentSubPageTitle}}</li>
+                        </ol>
+                        <h6 class="slim-pagetitle" id="siteCateTitle"><!--<span class="tx-12 tx-gray-600 mg-l-10">주문일자 2020.08.21 ~ 2020.08.21</span>--></h6>
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <div class="d-sm-flex">
+                                <div class="col-sm mg-sm-t-0" style="padding: 0;">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="주문검색">
+                                        <span class="input-group-btn mg-r-10-force">
+										  <button class="btn bd bd-l-0 bg-white tx-gray-600" type="button"><i class="fa fa-search"></i></button>
+										</span>
+                                        <a href="" class="btn btn-purple mg-l-auto">주문서인쇄 <i class="fa fa-print"></i> </a>
+                                    </div><!-- input-group -->
+                                </div>
+                            </div><!-- d-flex -->
+
+                            <div class="card card-table  mg-t-10 ">
+                                <div class="card-header" style="padding: 10px;  padding-bottom: 0px;">
+                                    <div class="form-group mr-3 mg-0-force flex-wrap">
+                                        <p style="margin-top: 10px; " id="listCount">총주문 25건</p>
+                                    </div><!-- select -->
+
+                                    <nav class="nav">
+                                        <a href="" class="nav-link active">전체</a>
+                                        <a href="" class="nav-link active">정상</a>
+                                        <a href="" class="nav-link active">클래임</a>
+                                        <a href="" class="nav-link active">excel download</a>
+
+                                        <div class="form-group mg-0-force pd-l-10-force" style="margin-top: -8px!important; " >
+                                            <select class="form-control select2" data-placeholder="보기선택">
+                                                <option label="보기선택"></option>
+                                                <option value="10">10개씩보기</option>
+                                                <option value="20">20개씩보기</option>
+                                                <option value="30">30개씩보기</option>
+                                            </select>
+                                        </div><!-- select -->
+
+                                    </nav>
+                                </div><!-- card-header -->
+
+
+                                <div class="table-responsive">
+                                    <table class="table mg-b-0 tx-13">
+                                        <thead>
+                                        <tr class="tx-10">
+                                            <th class="pd-y-5" style="width: 30px;">
+                                                <label class="ckbox wd-16 mg-b-0">
+                                                    <input type="checkbox" id="check-all"><span></span>
+                                                </label>
+                                            </th>
+                                            <th class="pd-y-5 tx-center">주문일</th>
+                                            <th class="pd-y-5 tx-center">주문번호</th>
+                                            <th class="pd-y-5 tx-center">주문상태</th>
+                                            <th class="pd-y-5 tx-center">제품명</th>
+                                            <th class="pd-y-5 tx-center">결제금액</th>
+                                            <th class="pd-y-5 tx-center">결제수단</th>
+                                            <th class="pd-y-5 tx-center">주문자명</th>
+                                            <th class="pd-y-5 tx-center">수령자명</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="resultList">
+
+
+                                        </tbody>
+                                    </table>
+                                </div><!-- table-responsive -->
+                            </div><!-- card -->
+
+                            <form name="excelForm" id="excelForm" action="/selectDeliveryListToConvertXlsx" style="display: none;">
+                                <input type="hidden" id="selectSeq" name="selectSeq" />
+                            </form>
+
+
+
+                            <div class="row row-xs mg-t-20">
+                                <div class="col-sm-6 col-lg-6 ">
+                                    <div class="card card-status">
+                                        <a href="#" onclick="selectDeliveryListToConvertXlsx();return false;">
+                                            <div class="media tx-center">
+                                                <i class="icon ion-ios-cloud-download-outline tx-purple"></i>
+                                                <div class="media-body">
+                                                    <h6 class="tx-bold">EXCEL양식 다운로드</h6>
+                                                </div><!-- media-body -->
+                                            </div><!-- media -->
+                                        </a>
+                                    </div><!-- card -->
+                                </div><!-- col-3 -->
+                                <div class="col-sm-6 col-lg-6 mg-t-10 mg-lg-t-0">
+                                    <div class="card card-status">
+                                        <a href="#" onclick="triggerXlsxUpload();return false;">
+                                            <div class="media tx-center">
+                                                <i class="icon ion-ios-cloud-upload-outline tx-primary"></i>
+                                                <div class="media-body">
+                                                    <h6 class="tx-bold">송장 EXCEL 업로드</h6>
+                                                </div><!-- media-body -->
+                                            </div><!-- media -->
+                                        </a>
+                                    </div><!-- card -->
+                                </div><!-- col-3 -->
+                            </div>
+
+
+                        </div><!-- col-12 -->
+
+                    </div><!-- row -->
+
+                </div><!-- container -->
+            </div>	<!-- end ajax-container -->
+
+        </div><!-- end container -->
+
+
+    </div><!-- slim-mainpanel -->
+
+
+</div><!-- slim-body -->
+
+
+
+</div>
+
+<div id="loading" class="modal-loader modal show">
+    <div class="modal-dialog modal-lg ">
+        <div class="d-flex pos-relative align-items-center">
+            <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://static2.selec7.com/lib/jquery/js/jquery.js"></script>
+<script src="https://static2.selec7.com/lib/popper.js/js/popper.js"></script>
+<script src="https://static2.selec7.com/lib/bootstrap/js/bootstrap.js"></script>
+<script src="https://static2.selec7.com/lib/jquery.cookie/js/jquery.cookie.js"></script>
+<script src="https://static2.selec7.com/lib/d3/js/d3.js"></script>
+<script src="https://static2.selec7.com/lib/rickshaw/js/rickshaw.min.js"></script>
+<script src="https://static2.selec7.com/lib/chart.js/js/Chart.js"></script>
+<script src="https://static2.selec7.com/lib/select2/js/select2.full.min.js"></script>
+<script src="https://static2.selec7.com/lib/jt.timepicker/js/jquery.timepicker.js"></script>
+<script src="https://static2.selec7.com/lib/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
+<script src="https://static2.selec7.com/lib/jquery-ui/js/jquery-ui.js"></script>
+
+<!-- Form  -->
+<script type="text/javascript" src="https://static2.selec7.com/lib/form/jquery.form.js"></script>
+
+<script src="https://static2.selec7.com/js/slim.js"></script>
+<script src="https://static2.selec7.com/js/ResizeSensor.js"></script>
+
+<script type="text/javascript" src="https://static2.selec7.com/js/common.js"></script>
+<script type="text/javascript" src="https://static2.selec7.com/js/codblock/common.js"></script>
+
+<script type="text/javascript" src="https://static2.selec7.com/js/codblock/delivery/list.js"></script>
+<script type="text/javascript" src="https://static2.selec7.com/js/codblock/delivery/content.js"></script>
+
+<script>
+
+    $(document).ready(function() {
+
+        //http->https start
+        if (location.hostname === "localhost" || location.hostname === "127.0.0.1"){
+            console.log("test");
+        }else {
+            if (document.location.protocol == 'http:') {
+                document.location.href = document.location.href.replace('http:', 'https:');
+            }
+        }
+        //http->https end
+
+
+        // Full colored for both box and dropdown
+        $('.allChange').select2({
+            containerCssClass: 'select2-full-color select2-primary',
+            minimumResultsForSearch: Infinity // disabling search
+        }).on('select2:select', function (e) {
+            // Do something
+
+        });
+
+        //사이트 Info 가져오기
+        getSiteInfo("order");
+
+        $("#loading").removeClass("show");
+
+        getOrderDeliveryList();
+
+        //all CHECK
+        $('#check-all').click( function() {
+            $('.deliveryCheck').prop( 'checked', this.checked );
+        });
+
+        //CSV 업로드 Start
+        $('#sendCsv').on("change", function(e){
+
+            let getAuth = getCookie("siteinfo");
+
+            var iSize = 0;
+            var total = $("#sendCsv")[0].files.length;
+            var i=0, ext;
+
+            for(i=0; i<total; i++) {
+                iSize += $("#sendCsv")[0].files[i].size;
+                var ext=fileCheck_xlsx($("#sendCsv")[0].files[i].name);
+                if(ext != "ok") {
+                    var alert_title = ext+" 파일은 업로드 하실 수 없습니다.";
+                    alert(alert_title);
+                    return false;
+                }
+            }
+
+            if(iSize > 1024*1024*50) {
+                var alert_title = "선택한 이미지 총용량은 50MB를 초과할 수 없습니다.";
+                alert(alert_title);
+                return false;
+            }
+
+
+            $("#csvForm").ajaxForm({
+                type: "post",
+                dataType: "json",
+                async:true,
+                url: "/order/orderXlsxUpdate",
+                beforeSend : function(xhr){
+                    xhr.setRequestHeader("authorization",getAuth);
+                },
+                beforeSubmit: function (data,form,option) {
+
+                },
+                uploadProgress: function (event, position, total, percentComplete) {
+
+                },
+                complete: function (xhr) {
+                    //alert("완료");
+                },
+                success: function(data){
+
+                    let msg = data.msg;
+
+                    if(msg=="Fail"){
+                        alert("파일 업로드가 실패했습니다.\n잠시 후에 다시 시도해주세요.");
+                    }else{
+                        alert("송장 정보가 업데이트되었습니다.");
+                        location.reload();
+                    }
+
+                },
+                error:function(request,status,error){
+
+                    alert("잠시 후에 다시 시도해주세요");
+                    //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                    return false;
+                }
+            });
+
+            //ajaxForm 이벤트 호출
+            $("#csvForm").submit();
+
+        });
+        //CSV 업로드 End
+
+
+
+
+
+    });
+
+
+</script>
+
+
+
+</body>
+</html>

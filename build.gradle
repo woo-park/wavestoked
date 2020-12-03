@@ -58,6 +58,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
+//    compile 'mysql:mysql-connector-java:5.1.48'
+
     compile('org.springframework.boot:spring-boot-starter-mustache')
 //    compile('com.h2database:h2:1.4.200')
     compile('com.h2database:h2')
@@ -80,11 +82,51 @@ dependencies {
     testImplementation 'org.projectlombok:lombok'
 
 
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.0'
+
+    // https://mvnrepository.com/artifact/com.auth0/java-jwt
+    compile group: 'com.auth0', name: 'java-jwt', version: '3.10.3'
+    // 중요
+// https://mvnrepository.com/artifact/com.opencsv/opencsv
+    compile group: 'com.opencsv', name: 'opencsv', version: '4.4'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
+
+
 
 }
+
+
+
+task dockerLocalRun(){
+    doLast{
+        def imageName = "${project.name}:${project.version}"
+        def containerName = "dockerdemo"
+
+        exec{ commandLine "docker stop ${containerName}".split(' ') }
+        exec{ commandLine "docker rm ${containerName}".split(' ') }
+        exec{ commandLine "docker run -d -p 80:8080 --name ${containerName} ${imageName}".split(' ') }
+
+        println('\n도커 빌드 완료.')
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+
+
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
 }
 // we're not using spring initializer bc then we can't understand what build.gradle does
+
