@@ -8,6 +8,7 @@
         <class>com.wavestoked.domain.post.Post</class>
         <class>com.wavestoked.domain.announcement.Announcement</class>
         <class>com.wavestoked.domain.topic.Topic</class>
+        <class>com.wavestoked.domain.academy.Academy</class>
         <class>com.wavestoked.domain.board.Board</class>
 <!--        <class>com.wavestoked.package-info</class>-->
 <!--        <mapping package="com.wavestoked.package-info">-->
@@ -28,7 +29,7 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value = "false"/>
             <property name="hibernate.id.new_generator_mappings" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>
 
 
