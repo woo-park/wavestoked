@@ -33,7 +33,7 @@ public class Member {
     private String zipcode;
 
     @OneToMany(targetEntity = Ord.class, mappedBy = "member")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Ord> orders = new ArrayList<Ord>();
+    private final List<Ord> orders = new ArrayList<Ord>();
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JoinColumn(name="TEAM_ID")

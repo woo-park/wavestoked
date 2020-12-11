@@ -40,7 +40,7 @@ public class Ord {
     private String ordName;
 
     @OneToMany(mappedBy = "ord", targetEntity = OrderItem.class)//, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems = new ArrayList<OrderItem>();
+    private final List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
     @Column(name="ORD_DATE")   // H2인지 뭔지가 이름을 UPPER _ CASE밖에 읽질 못하네
     @CreationTimestamp

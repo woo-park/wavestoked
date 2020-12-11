@@ -1,7 +1,7 @@
 package com.wavestoked.domain.sampleOrder;
 
-import com.wavestoked.domain.sample.Sample;
-import kr.tenth.selec7.order.domain.model.TblOrderInfo;
+//import com.wavestoked.domain.sample.Sample;
+//import kr.tenth.selec7.order.domain.model.TblOrderInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

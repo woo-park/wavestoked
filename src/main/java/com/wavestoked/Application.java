@@ -39,7 +39,7 @@ public class Application {
 
         SpringApplication.run(Application.class, args);
 //        testORM_양방향_리팩토링();
-//        testingDiscrim();
+        testingDiscrim();
 //        test_json_type_db();  not working due to h2 not being able to map json type column
     }
     public static void test_json_type_db() {
